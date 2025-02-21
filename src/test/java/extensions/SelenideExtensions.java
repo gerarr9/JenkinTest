@@ -22,6 +22,7 @@ public class SelenideExtensions implements BeforeAllCallback, BeforeEachCallback
         ChromeOptions options = new ChromeOptions();
         options.setCapability(CapabilityType.PAGE_LOAD_STRATEGY, "eager");
         Configuration.browserCapabilities = options;
+        Configuration.headless = true;
         Configuration.browserSize = "1920x1080";
 
         SelenideLogger.removeAllListeners();
