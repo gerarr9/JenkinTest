@@ -10,17 +10,18 @@ repositories {
     mavenCentral()
 }
 
-
-val junitVersion = "5.11.2"
+val junitVersion = "5.11.3"
 val assertjVersion = "3.26.3"
 val allureVersion = "2.28.1"
 val aspectjweaverVersion = "1.9.22"
 val selenideVersion = "7.4.0"
 val lombokVersion = "1.18.32"
+val restAssuredVersion = "5.5.0"
+val jacksonVersion = "2.15.2"
 
 dependencies {
     // JUnit - core test framework
-    implementation(platform("org.junit:junit-bom:5.11.2"))
+    implementation(platform("org.junit:junit-bom:$junitVersion"))
     implementation("org.junit.jupiter:junit-jupiter")
     implementation("org.junit.jupiter:junit-jupiter-engine")
     implementation("org.junit.jupiter:junit-jupiter-api")
@@ -40,6 +41,12 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:$lombokVersion")
     testCompileOnly("org.projectlombok:lombok:$lombokVersion")
     testAnnotationProcessor("org.projectlombok:lombok:$lombokVersion")
+
+    // Additional dependencies
+    implementation("io.rest-assured:rest-assured:$restAssuredVersion")
+    implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
+    implementation("com.github.javafaker:javafaker:1.0.2")
 }
 
 java {
@@ -53,9 +60,8 @@ tasks.withType<JavaCompile> {
 tasks.withType<Test> {
     jvmArgs = listOf("-Dfile.encoding=UTF-8", "-Xmx2g", "-Xms1g")
 
-    useJUnitPlatform { }
-
-    testLogging {
-        events("passed", "skipped", "failed")
+        useJUnitPlatform { }
+        testLogging {
+            events("passed", "skipped", "failed")
+        }
     }
-}
