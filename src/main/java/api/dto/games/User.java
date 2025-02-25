@@ -1,5 +1,8 @@
 package api.dto.games;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,8 +13,15 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
-    public List<Game> games;
-    public String login;
-    public String pass;
+    @JsonProperty("pass")
+    private String pass;
+
+    @JsonProperty("games")
+    private List<Game> games;
+
+    @JsonProperty("login")
+    private String login;
 }

@@ -1,8 +1,7 @@
 package tests;
 
-import Fabric.UserFabric;
-import api.dto.games.Game;
 import api.dto.games.User;
+import fabric.UserFabric;
 import api.specification.RequestSpec;
 import extensions.RestExtensions;
 import io.restassured.RestAssured;
@@ -13,7 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 public class Api {
 
     @Test
-    public void first() {
+    public void createUser() {
         User user = UserFabric.createDefaultUser();
         System.out.println(user);
 
@@ -22,7 +21,7 @@ public class Api {
                 .body(user)
                 .post("api/signup")
                 .then().log().all()
-                .statusCode(200)
+                .statusCode(201)
                 .extract().as(User.class);
 
         System.out.println(createUser);

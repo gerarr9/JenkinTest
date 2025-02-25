@@ -1,5 +1,6 @@
 package api.dto.games;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,6 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class SimilarDlc {
-    private String dlcNameFromAnotherGame;
+    @JsonProperty("isFree")
     private boolean isFree;
+
+    @JsonProperty("dlcNameFromAnotherGame")
+    private String dlcNameFromAnotherGame;
 }

@@ -1,5 +1,6 @@
 package api.dto.games;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,9 +10,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Requirements {
-    private int hardDrive;
-    private String osName;
-    private int ramGb;
+public class Requirements{
+
+    @JsonProperty("videoCard")
     private String videoCard;
+
+    @JsonProperty("hardDrive")
+    private int hardDrive;
+
+    @JsonProperty("osName")
+    private String osName;
+
+    @JsonProperty("ramGb")
+    private int ramGb;
 }
