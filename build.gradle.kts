@@ -60,7 +60,15 @@ tasks.withType<JavaCompile> {
 tasks.withType<Test> {
     jvmArgs = listOf("-Dfile.encoding=UTF-8", "-Xmx2g", "-Xms1g")
 
-        useJUnitPlatform { }
+        useJUnitPlatform {
+            val includeTags = findProperty("includeTags")?.toString()
+
+            println("Include tags: $includeTags")  // Выводим переданный параметр
+
+            if (includeTags != null && includeTags.isNotEmpty()) {
+                includeTags(includeTags)
+            }
+        }
         testLogging {
             events("passed", "skipped", "failed")
         }

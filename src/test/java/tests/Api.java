@@ -21,7 +21,6 @@ public class Api {
     public void createUser() {
         UserService.createUser(user);
     }
-
     @Test
     @Tag("smoke")
     public void auto() {
