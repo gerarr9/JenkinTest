@@ -12,7 +12,7 @@ public class UserFabric {
 
     public static User createDefaultUser() {
         return User.builder()
-                .login("gerarr99" + faker.random().nextInt(10000))
+                .login("user" + faker.random().nextInt(10000))
                 .pass("123321")
                 .games(Collections.singletonList(createRandomGame()))
                 .build();
