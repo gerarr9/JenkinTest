@@ -1,4 +1,4 @@
-package fabric;
+package extensions;
 
 import api.dto.games.*;
 import com.github.javafaker.Faker;
@@ -8,16 +8,18 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class UserFabric {
+    private static Faker faker = new Faker();
+
     public static User createDefaultUser() {
         return User.builder()
-                .login("gerarr999")
-                .pass("12123321")
+                .login("gerarr99" + faker.random().nextInt(10000))
+                .pass("123321")
                 .games(Collections.singletonList(createRandomGame()))
                 .build();
     }
 
-    public static Game createRandomGame(){
-        Faker faker = new Faker();
+    public static Game createRandomGame() {
+
         SimilarDlc similarDlc = SimilarDlc.builder()
                 .isFree(false)
                 .dlcNameFromAnotherGame(faker.funnyName().name())
@@ -56,3 +58,4 @@ public class UserFabric {
                 .build();
     }
 }
+

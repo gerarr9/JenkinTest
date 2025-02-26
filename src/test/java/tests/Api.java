@@ -1,29 +1,47 @@
 package tests;
 
+import api.dto.games.Authorization;
 import api.dto.games.User;
-import fabric.UserFabric;
-import api.specification.RequestSpec;
+import api.sevice.UserService;
 import extensions.RestExtensions;
-import io.restassured.RestAssured;
+import extensions.UserFabric;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @ExtendWith(RestExtensions.class)
 public class Api {
+    @BeforeAll
+    public static void auto() {
+        Authorization authorization = new Authorization("123321", "gerarr996117");
+
+        UserService.authorization(authorization);
+    }
 
     @Test
-    public void createUser() {
+    @Tag("smoke")
+    public void createUserCheck() {
         User user = UserFabric.createDefaultUser();
-        System.out.println(user);
 
-        User createUser = RestAssured.given()
-                .spec(RequestSpec.requestSpecification())
-                .body(user)
-                .post("api/signup")
-                .then().log().all()
-                .statusCode(201)
-                .extract().as(User.class);
 
-        System.out.println(createUser);
+        UserService.createUser(user);
+
+        assertThat(UserService.getListUser()).contains(user.getLogin());
     }
+
+
+    @Test
+    public void changePass() {
+        UserService.ChangePass("123");
+    }
+
+    @Test
+    public void deleteUser() {
+        UserService.deleteUser();
+    }
+
+
 }

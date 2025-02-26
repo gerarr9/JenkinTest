@@ -5,7 +5,13 @@ public enum ConfigData {
         public String getValue() {
             return ConfigReader.getConfigProperty("pendrak.url");
         }
+    },
+    JWT_TOKEN {
+        public String getValue() {
+            return ConfigReader.getConfigProperty("jwt.token");
+        }
     };
+
 
 
 
