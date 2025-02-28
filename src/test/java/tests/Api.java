@@ -21,6 +21,7 @@ public class Api {
     public void createUser() {
         UserService.createUser(user);
     }
+
     @Test
     @Tag("smoke")
     public void auto() {
@@ -48,7 +49,12 @@ public class Api {
 
     @Test
     public void deleteUser() {
+        Authorization authorization = new Authorization(user.getPass(), user.getLogin());
+        UserService.authorization(authorization);
+
         UserService.deleteUser();
+
+        assertThat(UserService.getListUser()).doesNotContain(user.getLogin());
     }
 
 
