@@ -14,10 +14,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(RestExtensions.class)
+@Tag("api")
+@Tag("all")
 public class Api {
     private User user = UserFabric.createDefaultUser();
 
     @BeforeEach
+
     public void createUser() {
         UserService.createUser(user);
     }
