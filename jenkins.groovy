@@ -30,7 +30,7 @@ pipeline {
                                 "UI Tests": {
                                     sh './gradlew test -PincludeTags=ui'
                                 },
-                                failFast: false // Не останавливаем пайплайн, если одна из стадий падает
+                                failFast: false // Тесты не прерываются при падении одной из стадий
                         )
                     }
                 }
@@ -48,7 +48,7 @@ pipeline {
 
         stage('Allure Report') {
             steps {
-                allure includeProperties: false, jdk: '', results: [[path: 'build/allure-results']], allowEmptyResults: true
+                allure includeProperties: false, jdk: '', results: [[path: 'build/allure-results']]
             }
         }
     }
