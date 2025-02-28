@@ -8,6 +8,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
+                    sh 'chmod +x gradlew'
                     if (params.TEST_TYPE == 'api') {
                         sh './gradlew test -PincludeTags=api'
                     } else if (params.TEST_TYPE == 'ui') {
